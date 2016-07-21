@@ -9,12 +9,6 @@ import static org.junit.Assert.assertEquals;
 
 public class StockHelperTest {
 
-    @Test
-    public void singlePossibility() throws Exception {
-        List<BigDecimal> stockPrices = toPrices("8.00 9.00 10.00");
-        assertBestDeal(stockPrices, "8.00", "10.00");
-    }
-
     private List<BigDecimal> toPrices(String s) {
         return Arrays.stream(s.split(" ")).map(BigDecimal::new).collect(toList());
     }
@@ -23,6 +17,12 @@ public class StockHelperTest {
         Deal deal = StockHelper.bestDeal(stockPrices);
         assertEquals(new BigDecimal(purchasePrice), deal.getPurchasePrice());
         assertEquals(new BigDecimal(sellingPrice), deal.getSellingPrice());
+    }
+
+    @Test
+    public void singlePossibility() throws Exception {
+        List<BigDecimal> stockPrices = toPrices("8.00 9.00 10.00");
+        assertBestDeal(stockPrices, "8.00", "10.00");
     }
 
     @Test
